@@ -1,0 +1,104 @@
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+}
+
+.heading-primary {
+  font-size: 7rem;
+  color: $color-primary;
+
+  @include respond(tab-port) { 
+    font-size: 5rem; 
+  }
+
+  &--main {
+    display: block;
+    padding-bottom: 5rem;
+  }
+
+  &--sub {
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 3rem;
+    font-weight: 300;
+    letter-spacing: .2rem;
+
+    @include respond(tab-port) { 
+      font-size: 2rem;
+    }
+  }
+}
+
+.heading-secondary {
+  color: $color-secondary;
+  font-size: 6rem;
+}
+
+.heading-tertiary {
+  font-size: 4rem;
+  color: $color-secondary;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  &,
+  &:link,
+  &:visited {
+    text-decoration: none;
+    color: $color-primary;
+  }
+}
+
+.nav__brand {
+  font-family: 'Lobster', cursive;
+  font-size: 3rem;
+  color: $color-tertiary !important;
+}
+
+.tagline {
+  font-size: $default-font;
+  display: block;
+
+  &--main {
+    font-weight: 700;
+    color: $color-tertiary;
+  }
+
+  &--sub {
+    font-weight: 300;
+    color: $color-secondary;
+  }
+}
+
+.card:hover.tagline {
+  color: white;
+}
+
+.info {
+  text-align: center;
+  color: $color-secondary;
+
+  &__detail {
+    width: 10rem;
+    display: block;
+  }
+
+  &--title {
+    font-size: 1.8rem;
+    text-decoration: underline;
+    text-transform: uppercase;
+  }
+
+  &--spec {
+    font-size: 6rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+  }
+}
+
+.description {
+  font-family: 'Open Sans', sans-serif;
+  font-size: $default-font;
+}

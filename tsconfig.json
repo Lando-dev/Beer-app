@@ -26,13 +26,14 @@
       "dom.iterable",
       "scripthost"
     ]
+    
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx", "src/modules/Beers.js"
   ],
   "exclude": [
     "node_modules"

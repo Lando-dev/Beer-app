@@ -1,0 +1,60 @@
+.banner {
+  position: relative;
+  z-index: -1;
+  display: grid;
+  grid-template-columns: minmax(5rem, 1fr) repeat(10, minmax(min-content, 24.5rem)) minmax(5rem, 1fr);
+  height: 75vh;
+
+  @include respond(tab-port) { 
+    height: 60vh; 
+  }
+
+  &-content {
+    width: 70%;
+    grid-column: 2 / 10;
+    align-self: center;
+    margin-left: 5rem;
+
+    @include respond(tab-port) { 
+      width: 85%; 
+    }
+  }
+}
+
+.products {
+  display: grid;
+  grid-template-columns: minmax(5rem, 1fr) repeat(10, minmax(min-content, 15rem)) minmax(5rem, 1fr);
+  justify-content: center;
+ 
+  .heading-secondary {
+    grid-column: 5 / 9;
+    justify-self: center;
+    padding-bottom: 2rem;
+    display: block;
+
+    @include respond(tab-port) { 
+      font-size: 4rem;
+    } 
+  }
+
+  .search {
+    grid-column: 5 / 8;
+  }
+
+  .sort-container {
+    grid-column: 8 / 10;
+  }
+}
+
+.product {
+  display: grid;
+  grid-template-columns: minmax(50rem, 60rem) minmax(50rem, 60rem);
+  justify-content: center;  
+  grid-gap: 2rem;
+  margin-top: 5rem;
+  justify-items: center;
+
+  @include respond(tab-port) { 
+    grid-template-columns: 50rem;
+  }
+}

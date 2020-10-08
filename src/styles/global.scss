@@ -1,0 +1,21 @@
+@import "abstracts/variables";
+@import "abstracts/mixins";
+
+@import "base/base";
+@import "base/typography";
+@import "base/animation";
+@import "base/utilities";
+
+@import "components/bg-video";
+@import "components/searchBox";
+@import "components/card";
+@import "components/gallery";
+@import "components/button";
+
+
+@import "layout/header";
+@import "layout/footer";
+
+@import "pages/home";
+@import "pages/prodDetails";
+@import "pages/categories";
