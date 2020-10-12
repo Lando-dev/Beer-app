@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-    <div class="details-primary">
+    <div class="details-primary u-center-text">
       <h1 class="heading-secondary">Bramling X</h1>
       <p class="tagline--main">Single Hop IPA Series - 2011.</p>
     </div>
@@ -21,8 +21,8 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Random'
-}
+<script lang="ts">
+import {Vue} from 'vue-class-component'
+
+export default class Random extends Vue {}
 </script>

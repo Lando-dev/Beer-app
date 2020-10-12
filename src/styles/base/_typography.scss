@@ -38,6 +38,14 @@ h1, h2, h3 {
   color: $color-secondary;
 }
 
+h6 {
+  color: $color-primary;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  margin: 1.5rem 0;
+  letter-spacing: 2px
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
 }

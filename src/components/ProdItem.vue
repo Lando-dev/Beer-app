@@ -1,5 +1,5 @@
 <template>
-<input type="text" v-model="search" placeholder="Search Beer">
+<input class="prod-search" type="text" v-model="search" placeholder="Search Beer">
   <div class="card" v-for="item in filteredBeers.slice(0, 10)" v-bind:key="item.id" >
     <router-link class="card__link" to="/id:">
       <img class="card__link-thumbnail" :src='item.image_url' alt="Beer bottle">
@@ -10,13 +10,11 @@
   </div>
 </template>
 
-<script>
-import Vue from 'vue';
+<script lang="ts">
+import { Options, Vue } from "vue-class-component";
 import axios from 'axios';
 
-export default {
-  name: 'ProdItem',
-
+@Options({
   data() {
     return{
       items: [],
@@ -32,12 +30,14 @@ export default {
 
   computed: {
     filteredBeers: function() {
-      return this.items.filter((item) => {
-        return item.name.match(this.search);
+      return this.items.filter((item: any) => {
+        return item.name.toLowerCase().match(this.search.toLowerCase());
       })
     }
   }
-}
+})
+
+export default class ProdItem extends Vue {}
 </script>
 
 

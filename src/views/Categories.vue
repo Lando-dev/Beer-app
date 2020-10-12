@@ -1,7 +1,7 @@
 <template>
   <div class="categories">
     <div class="details-primary">
-      <h1 class="heading-secondary">Explore a wide range of categories</h1>
+      <h1 class="heading-secondary u-center-text">Explore a wide range of categories</h1>
     </div>
     <div class="category">
       <div class="category__item category__item--1">
@@ -45,8 +45,8 @@
 </template>
 
 
-<script>
-export default {
-  name: 'Categories'
-}
+<script lang="ts">
+import {Vue} from 'vue-class-component'
+
+export default class Categories extends Vue {}
 </script>

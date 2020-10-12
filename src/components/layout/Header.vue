@@ -1,6 +1,6 @@
 <template>
-  <header class="header" :class="{change_color: scrollPosition > 500}">
-    <nav class="nav" id="navbar" :class="{invert: scrollPosition > 600}" >
+  <header class="header" :class="{change_color: scrollPosition > 400}">
+    <nav class="nav" id="navbar" :class="{invert: scrollPosition > 400}" >
       <router-link class="nav__brand" to="/">
         TheBeerCo.
       </router-link>
@@ -17,10 +17,10 @@
   <router-view />
 </template>
 
-<script>
-export default {
-  name: "Header",
+<script lang="ts">
+import {Options, Vue} from 'vue-class-component'
 
+@Options({
   data() {
     return{
       scrollPosition: null
@@ -36,5 +36,7 @@ export default {
   mounted() {
     window.addEventListener('scroll', this.updateScroll);
   },
-};
+})
+
+export default class Header extends Vue {}
 </script>

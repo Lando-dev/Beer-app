@@ -3,7 +3,7 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: repeat(3, 40vw);
 
-  @include respond(tab-port) { 
+  @include respond(tab-land) { 
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
   }
