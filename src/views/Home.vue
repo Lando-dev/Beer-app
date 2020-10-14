@@ -1,8 +1,6 @@
 <template>
   <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
     <HomeBanner />
-    <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
     <section class="products">
       <h2 class="heading-secondary u-center-text u-margin-top-mid">Craft beers, sour, hoppy or seasonal</h2> 
       <div class="search">
@@ -26,11 +24,12 @@
             <li class="sort-dropdown__item">New</li>
         </ul> -->
       </div>
-
     </section>
 
-    <div class="product">
-      <ProdItem />
+    <div class="product u-margin-top-mid">
+      <Suspense>
+        <ProdItem />
+      </Suspense>
     </div>
     <Gallery />
   </div>

@@ -8,11 +8,22 @@
       <span class="tagline tagline--sub">{{item.abv}}% alc./vol.</span>
     </router-link>
   </div>
+
+  <!-- <div class="card" v-for="beer in beers" v-bind:key="beer.id" >
+    <router-link class="card__link" to="/id:">
+      <img class="card__link-thumbnail" :src='beer.image_url' alt="Beer bottle">
+      <h3 class="heading-tertiary">{{beer.name.slice(0, 20)}}</h3>
+      <span class="tagline tagline--main">{{beer.tagline}}</span>
+      <span class="tagline tagline--sub">{{beer.abv}}% alc./vol.</span>
+    </router-link>
+  </div> -->
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import useBeers from '@/modules/beers'
 import axios from 'axios';
+
 
 @Options({
   data() {
@@ -37,7 +48,14 @@ import axios from 'axios';
   }
 })
 
-export default class ProdItem extends Vue {}
+export default class ProdItem extends Vue {
+
+  // async setup() {
+  //   const { beers } = await useBeers();
+
+  //   return { beers };
+  // } 
+}
 </script>
 
 

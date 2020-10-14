@@ -3,10 +3,10 @@
     <div class="details-primary">
       <h1 class="heading-secondary u-center-text">Explore a wide range of categories</h1>
     </div>
-    <div class="category">
+    <div class="category" v-for="category in categories" v-bind:key="category.id">
       <div class="category__item category__item--1">
         <img class="category__item" src="../assets/images/cat-1.jpg" alt="">
-        <h4>IPA</h4>
+        <h4>{{category.name}}</h4>
       </div>
       <div class="category__item category__item--2">
         <img class="category__item" src="../assets/images/cat-2.jpg" alt="">
@@ -46,7 +46,23 @@
 
 
 <script lang="ts">
-import {Vue} from 'vue-class-component'
+import {Options, Vue} from 'vue-class-component'
+import { Category } from '../modules/Categories'
 
-export default class Categories extends Vue {}
+@Options({
+  data() {
+    return{
+      Category: []
+    }
+  }
+})
+
+export default class Categories extends Vue {
+  public categories: Category[] = [];
+
+  mounted() {
+    
+  }
+  
+}
 </script>
