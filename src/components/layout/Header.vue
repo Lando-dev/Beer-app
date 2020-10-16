@@ -35,6 +35,11 @@ import {Options, Vue} from 'vue-class-component'
 
   mounted() {
     window.addEventListener('scroll', this.updateScroll);
+
+    if (this.$route.path === "/category/:category") { 
+        this.colorNav = true
+    }
+    
   },
 })
 

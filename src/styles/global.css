@@ -324,6 +324,18 @@ a, a:link, a:visited {
       justify-self: center;
 }
 
+.cards {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: minmax(40rem, 50rem) minmax(40rem, 50rem);
+      grid-template-columns: minmax(40rem, 50rem) minmax(40rem, 50rem);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  grid-gap: 2rem 8rem;
+  justify-items: center;
+}
+
 .gallery {
   display: -ms-grid;
   display: grid;
@@ -735,13 +747,9 @@ nav {
 .product {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: minmax(40rem, 50rem) minmax(40rem, 50rem);
-      grid-template-columns: minmax(40rem, 50rem) minmax(40rem, 50rem);
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  grid-gap: 2rem 8rem;
-  justify-items: center;
 }
 
 @media only screen and (max-width: 56.25em) {
@@ -751,8 +759,14 @@ nav {
   }
 }
 
-.prod-search {
+.filter {
   grid-column: 1 / -1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .details {

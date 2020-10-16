@@ -48,16 +48,14 @@
 
 .product {
   display: grid;
-  grid-template-columns: minmax(40rem, 50rem) minmax(40rem, 50rem);
-  justify-content: center;  
-  grid-gap: 2rem 8rem;
-  justify-items: center;
-
+  justify-content: center;
   @include respond(tab-port) { 
     grid-template-columns: 50rem;
   }
 }
 
-.prod-search {
+.filter {
   grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
 }

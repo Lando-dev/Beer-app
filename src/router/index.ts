@@ -20,14 +20,21 @@ const routes: Array<RouteRecordRaw> = [
     name: "Random",
 
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Random.vue")
+      import("../views/Random.vue")
   },
   {
-    path: "/prod-details",
+    path: "/prod-details/:id",
     name: "ProdDetails",
 
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ProdDetails.vue")
+      import("../views/ProdDetails.vue")
+  },
+  {
+    path: "/category/:category",
+    name: "ProdItem",
+
+    component: () =>
+      import("../components/ProdItem.vue")
   }
 ];
 

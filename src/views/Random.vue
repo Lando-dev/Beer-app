@@ -17,7 +17,7 @@
     </div>
   </div>
   <div class="rand-gen">
-    <a href="" class="btn">Pick another</a>
+    <button @click="generate" href="" class="btn">Pick another</button>
   </div>
 </template>
 
@@ -36,8 +36,17 @@ import axios from 'axios';
     axios.get('https://api.punkapi.com/v2/beers/random')
     .then(res => this.items = res.data)
     .catch(err => console.log(err));
+  },
+
+  methods: {
+  generate() {
+     axios.get('https://api.punkapi.com/v2/beers/random')
+    .then(res => this.items = res.data)
+    .catch(err => console.log(err));
   }
+}
 })
+
 
 export default class Random extends Vue {}
 </script>
