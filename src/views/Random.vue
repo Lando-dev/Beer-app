@@ -17,7 +17,7 @@
     </div>
   </div>
   <div class="rand-gen">
-    <button @click="generate" href="" class="btn">Pick another</button>
+    <button @click="generate" href="" class="btn btn--rand">Pick another</button>
   </div>
 </template>
 

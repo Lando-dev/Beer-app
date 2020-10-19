@@ -2,19 +2,27 @@
   &,
   &:link,
   &:visited {
-    color: $color-primary;
-    background-color: $color-tertiary;
     text-transform: uppercase;
     text-decoration: none;
-    padding: 1.5rem 8rem;
     display: inline-block;
     margin: 0 auto;
     transition: all .2s;
     border: 1px solid $color-primary;
-    font-size: 2rem;
-    color: white;
     letter-spacing: 3px;
     border-radius: 6px;
+    background-color: $color-tertiary;
+    color: $color-primary;
+    cursor: pointer;
+  }
+
+  &--rand {
+    font-size: 2rem;
+    padding: 1.5rem 8rem;
+  }
+
+  &--sort {
+    margin-right: 1rem;
+    padding: 1rem;
   }
 
   &:hover {
@@ -24,6 +32,7 @@
   &:active,
   &:focus {
       outline: none;
+      border: none;
       transform: translateY(-1px);
       box-shadow: 0 .5rem 1rem rgba(black,.2);
   }

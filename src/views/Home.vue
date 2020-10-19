@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     <HomeBanner />
-    <section class="products">
-      <h2 class="heading-secondary u-center-text u-margin-top-mid">Craft beers, sour, hoppy or seasonal</h2>       
+    <section class="section-products">
+      <h2 class="heading-secondary u-center-text u-margin-top-md">Craft beers, sour, hoppy or seasonal</h2>       
     </section>
-    <div class="product u-margin-top-mid">
+    <div class="product-list">
       <ProdItem />
     </div>
     <Gallery />

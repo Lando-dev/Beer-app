@@ -18,10 +18,14 @@
     @include respond(tab-port) { 
       width: 85%; 
     }
+
+    .heading-primary {
+      animation: moveInTop 2s ease;
+    }
   }
 }
 
-.products {
+.section-products {
   display: grid;
   grid-template-columns: minmax(5rem, 1fr) repeat(10, minmax(min-content, 15rem)) minmax(5rem, 1fr);
   justify-content: center;
@@ -37,25 +41,63 @@
     } 
   }
 
-  .search {
-    grid-column: 5 / 8;
-  }
-
   .sort-container {
     grid-column: 8 / 10;
   }
 }
 
-.product {
+.product-list {
   display: grid;
   justify-content: center;
-  @include respond(tab-port) { 
-    grid-template-columns: 50rem;
-  }
 }
 
 .filter {
   grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5rem;
+  justify-self: center;
+  justify-items: space-between;
+
+  .search {
+    grid-column: 1 / 1;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
+
+  .sort {
+    grid-column: 2;
+  }
+}
+
+.products {
+  display: grid;
+  grid-template-columns: minmax(40rem, 50rem) minmax(40rem, 50rem);
+  justify-content: center;  
+  grid-gap: 2rem 8rem;
+  justify-items: center;
+
+  @include respond(tab-port) { 
+    grid-template-columns: 50rem; 
+  }
+}
+
+.pagination {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  color: $color-secondary;
+
+  .page {
+    margin: 0 1rem;
+    font-size: 1.4rem;
+  }
+
+  span {
+    color: $color-tertiary;
+    font-size: 1.2rem;
+  }
+
+  a {
+    color: $color-secondary;
+  }
 }

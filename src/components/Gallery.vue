@@ -1,5 +1,5 @@
 <template>
-  <section class="gallery u-margin-top-big u-margin-bottom-big">
+  <section class="gallery u-margin-top-lg u-margin-bottom-lg">
         <figure class="gallery__item gallery__item--1">
           <img class="gallery__img" src="../assets/images/gal-1.jpg" alt="Gallery Image">
         </figure>

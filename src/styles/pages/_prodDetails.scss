@@ -10,6 +10,10 @@
     align-content: center;
     padding-bottom: 5rem;
     grid-column: 1 / -1;
+
+    @include respond(tab-port) { 
+      height: 30vh;
+    }
     
     .heading-secondary {
       color: $color-primary;

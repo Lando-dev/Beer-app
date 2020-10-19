@@ -1,5 +1,5 @@
 <template>
-  <footer class="site-footer">
+  <footer class="section-footer">
     <div class="footer">
       <div class="footer__about">
         <h6>About</h6>

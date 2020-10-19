@@ -13,7 +13,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "Categories",
 
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Categories.vue")
+      import("../views/Categories.vue")
   },
   {
     path: "/random",
@@ -41,9 +41,6 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  // scrollBehavior (to, from, savedPosition) {
-  //   return { x: 0, y: 0 }
-  // }
 });
 
-export default router;
+export default router ;

@@ -1,19 +1,16 @@
 <template>
-  <div class="cards" v-if="dataLoaded">
-    <div v-if="searchBox" class="filter">
-      <input class="prod-search" type="text" v-model="search" placeholder="Search Beer">
-      <!-- <label for="">Sort</label>
-      <select v-model="sort" name="" id="">
-        <option v-for="sort" v-bind:key="sort">{{sort}}</option>
-        
-      </select> -->
-      <button class="btn btn--sort" @click="sortAscending">A-Z</button>
-      <button class="btn btn--sort" @click="sortDescending">Z-A</button>
-      <button class="btn btn--sort" @click="AlcoholHighest">Alc % High</button>
-      <button class="btn btn--sort" @click="AlcoholLowest">Alc % Low</button>
+  <div class="products" v-if="dataLoaded">
+    <div v-if="searchBox" class="filter u-margin-top-md u-margin-bottom-md">
+      <input class="search" type="text" v-model="search" placeholder="Search Beer">
+      <div class="sort">
+        <button class="btn btn--sort" @click="sortAscending">A-Z</button>
+        <button class="btn btn--sort" @click="sortDescending">Z-A</button>
+        <button class="btn btn--sort" @click="AlcoholHighest">Alc % High</button>
+        <button class="btn btn--sort" @click="AlcoholLowest">Alc % Low</button>
+      </div>
       <div v-if="!searchBox"></div>
     </div>
-    <div class="card" v-for="item of filteredBeers.slice(0, 10)" v-bind:key="item.id" >
+    <div class="card" v-for="item of filteredBeers.slice(start, end)" v-bind:key="item.id">
       <router-link class="card__link" :to="`/prod-details/${item.id}`">
         <img class="card__link-thumbnail" :src='item.image_url' alt="Beer bottle">
         <h3 class="heading-tertiary" style="height: 1.5em; white-space: nowrap; overflow: hidden; width: 100%; text-overflow: ellipsis;">{{item.name}}</h3>
@@ -22,11 +19,20 @@
       </router-link>
     </div>
   </div>
+
+  <!-- Pagination -->
+  <div class="pagination u-margin-top-md" v-if="pageNumbers.length > 1">
+    <div class="page" v-for="page of pageNumbers" v-bind:key="page">
+      <a href="#" v-if="page != currentPage" @click="changePage($event, page)">{{ page }}</a>
+      <span v-if="page == currentPage">{{ page }}</span>
+    </div>
+  </div>
+
   <div v-if="!dataLoaded">There are no items.</div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { Options, Vue } from 'vue-class-component';
 import axios from 'axios';
 import Filter from './Filter.vue';
 
@@ -34,13 +40,17 @@ import Filter from './Filter.vue';
 
   data() {
     return{
+      maxPerPage: 10,
+      currentPage: 1,
+      start: 0,
+      end: 10,
+      pageNumbers: [],
+
       dataLoaded: false,
-      items: [].slice(0,10),
+      items: [],
       search: '',
       category: null,
       searchBox: true,
-
-      // sort: [ 'A-Z', 'Z-A' ]
     }
   },
 
@@ -50,16 +60,27 @@ import Filter from './Filter.vue';
       this.searchBox = false;
     }
 
-    axios.get('https://api.punkapi.com/v2/beers/')
+    this.end = this.maxPerPage;
+
+    axios.get('https://api.punkapi.com/v2/beers/') 
         .then(res => { 
           this.items = res.data; 
-          console.log(res); 
+          // console.log(res)
           this.dataLoaded = true; 
         
           if (this.category != null) {
             this.items = this.items.filter((beer: any) => {
+              // indexOf will look for a match in the string
+              // if it exists, it will return 0 or higher
+              // else it will just give -1
               return beer.description.toLowerCase().indexOf(this.category) > -1;
             });
+          }
+
+          const totalPages = Math.ceil(this.items.length / this.maxPerPage);
+          for (let page = 0; page < totalPages; page++)
+          {
+            this.pageNumbers.push(page + 1);
           }
         })
         .catch(err => { this.dataLoaded = false; console.log(err) });
@@ -67,16 +88,27 @@ import Filter from './Filter.vue';
 
   methods:{
     sortAscending() {
-      this.items.sort((a:any, b:any) => 0 - (a.name > b.name ? -1 : 1));
+      this.items.sort((a:any, b:any) => (a.name < b.name ? -1 : 1));
     },
     sortDescending() {
-      this.items.sort((a:any, b:any) => 0 - (a.name > b.name ? 1 : -1));  
+      this.items.sort((a:any, b:any) => (a.name < b.name ? 1 : -1));  
     },
     AlcoholHighest() {
-      this.items.sort((a:any, b:any) => 0 - (a.abv > b.abv ? 1 : -1));
+      this.items.sort((a:any, b:any) => (a.abv < b.abv ? 1 : -1));
     },
     AlcoholLowest() {
-      this.items.sort((a:any, b:any) => 0 - (a.abv > b.abv ? -1 : 1));
+      this.items.sort((a:any, b:any) => (a.abv < b.abv ? -1 : 1));
+    },
+    
+    changePage(e: any, page: number) {
+      this.currentPage = page;
+
+      // where the array should start slicing.
+      this.start = (this.currentPage - 1) * this.maxPerPage;
+      // where the array should stop slicing.
+      this.end = this.currentPage * this.maxPerPage;
+
+      e.preventDefault();
     }
   },
 
@@ -86,8 +118,6 @@ import Filter from './Filter.vue';
         return item.name.toLowerCase().match(this.search.toLowerCase());
       })
     }
-
-
   }
 })
 

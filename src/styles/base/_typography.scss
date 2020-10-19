@@ -89,7 +89,6 @@ a {
   color: $color-secondary;
 
   &__detail {
-    width: 10rem;
     display: block;
   }
 
@@ -103,6 +102,10 @@ a {
     font-size: 6rem;
     font-family: 'Playfair Display', serif;
     font-weight: 700;
+
+    @include respond(tab-land) {
+      font-size: 4rem;
+    }
   }
 }
 
