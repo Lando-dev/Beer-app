@@ -268,6 +268,26 @@ a, a:link, a:visited {
       justify-self: center;
 }
 
+.related-products {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(0, 1fr))[3];
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  grid-gap: 2rem;
+  justify-items: center;
+  padding: 0 10rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .related-products {
+    -ms-grid-columns: 50rem;
+        grid-template-columns: 50rem;
+  }
+}
+
 .gallery {
   display: -ms-grid;
   display: grid;
@@ -421,6 +441,40 @@ a, a:link, a:visited {
   margin: 8rem 0;
 }
 
+.banner {
+  position: relative;
+  z-index: -1;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: minmax(5rem, 1fr) (minmax(min-content, 24.5rem))[10] minmax(5rem, 1fr);
+      grid-template-columns: minmax(5rem, 1fr) repeat(10, minmax(-webkit-min-content, 24.5rem)) minmax(5rem, 1fr);
+      grid-template-columns: minmax(5rem, 1fr) repeat(10, minmax(min-content, 24.5rem)) minmax(5rem, 1fr);
+  height: 75vh;
+  width: 100vw;
+}
+
+.banner-content {
+  width: 70%;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 8;
+  grid-column: 2 / 10;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-left: 5rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .banner-content {
+    width: 85%;
+  }
+}
+
+.banner-content .heading-primary {
+  -webkit-animation: moveInTop 2s ease;
+          animation: moveInTop 2s ease;
+}
+
 nav {
   padding: 1rem 5rem;
 }
@@ -482,6 +536,78 @@ nav {
 
 .menu__item:not(:first-child) {
   padding: 0 0 0 11rem;
+}
+
+.navigation-menu {
+  display: none;
+  position: absolute;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .navigation-menu {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    z-index: 3;
+    right: 5rem;
+    top: 2rem;
+  }
+}
+
+.navigation-menu .menu-bar {
+  width: 20px;
+}
+
+.sidebar-menu {
+  background-color: #FAFAFA;
+  -webkit-box-shadow: -8px 8px 20px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: -8px 8px 20px -10px rgba(0, 0, 0, 0.75);
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 0;
+  display: none;
+}
+
+@media only screen and (max-width: 56.25em) {
+  .sidebar-menu {
+    display: block;
+  }
+}
+
+.sidebar-menu .sidebar__items {
+  display: -ms-grid;
+  display: grid;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.sidebar-menu .sidebar__items li {
+  padding: 4rem;
+}
+
+.sidebar-menu .sidebar__items a {
+  color: #242424;
+  font-size: 2.5rem;
+}
+
+.sidebar-menu .sidebar__items a:hover {
+  color: #C39702;
+}
+
+.open {
+  position: absolute;
+  z-index: 2;
+  -webkit-transition: ease-in .4s;
+  transition: ease-in .4s;
+  width: 40rem;
+  height: 90rem;
 }
 
 .section-footer {
@@ -610,45 +736,6 @@ nav {
 
 .footer-links a:active, .footer-links a:focus, .footer-links a:hover {
   color: #C39702;
-}
-
-.banner {
-  position: relative;
-  z-index: -1;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: minmax(5rem, 1fr) (minmax(min-content, 24.5rem))[10] minmax(5rem, 1fr);
-      grid-template-columns: minmax(5rem, 1fr) repeat(10, minmax(-webkit-min-content, 24.5rem)) minmax(5rem, 1fr);
-      grid-template-columns: minmax(5rem, 1fr) repeat(10, minmax(min-content, 24.5rem)) minmax(5rem, 1fr);
-  height: 75vh;
-}
-
-@media only screen and (max-width: 56.25em) {
-  .banner {
-    height: 60vh;
-  }
-}
-
-.banner-content {
-  width: 70%;
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 8;
-  grid-column: 2 / 10;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-  margin-left: 5rem;
-}
-
-@media only screen and (max-width: 56.25em) {
-  .banner-content {
-    width: 85%;
-  }
-}
-
-.banner-content .heading-primary {
-  -webkit-animation: moveInTop 2s ease;
-          animation: moveInTop 2s ease;
 }
 
 .section-products {

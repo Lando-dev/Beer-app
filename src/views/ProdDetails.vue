@@ -40,8 +40,15 @@
     </div>
   </div>
 
-  <div class="related-products" v-for="item of relatedItems" v-bind:key="item.id" >
-    <span>{{item.name}}</span>
+  <div class="related-products u-margin-bottom-lg">
+    <div class="card" v-for="item of relatedItems" v-bind:key="item.id">
+      <router-link class="card__link" :to="`/prod-details/${item.id}`">
+        <img class="card__link-thumbnail" :src='item.image_url' alt="Beer bottle">
+        <h3 class="heading-tertiary" style="height: 1.5em; white-space: nowrap; overflow: hidden; width: 100%; text-overflow: ellipsis;">{{item.name}}</h3>
+        <span class="tagline tagline--main">{{item.tagline}}</span>
+        <span class="tagline tagline--sub">{{item.abv}}% alc./vol.</span>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -64,34 +71,27 @@
       }
     },
 
+    // Call to api using api to avoid nesting
     async mounted() {
       const prodId: string = this.$route.params.id;
 
-      // await processes the function and puts its value into a variable.
       const res = await axios.get(`https://api.punkapi.com/v2/beers/${prodId}`).catch(err => console.log(err));
 
-      // Request didn't work, stop the function and give a 404.
       if (res === undefined) return;
 
-      // The API gives one item and we want to show that.
       this.product = res.data[0];
 
-      // Step 1: Store alc level in variable
+      // Related products by alcohol level
+
       const abv = this.product.abv;
 
-      // Step 2: Calculate the range
       const minAbv = Math.floor(abv); 
       const maxAbv = Math.ceil(abv);
 
-      console.log(minAbv, maxAbv);
-
-      // Step 3: Since we don't need the related products right away
-      // we can afford to delay the loading of the full list.
+      // 2nd Call to api to provide related items
       axios.get(`https://api.punkapi.com/v2/beers`)
         .then(res => { 
-          // Step 4: Sort according to the given range.
           this.relatedItems = res.data.filter((item: any) => item.id != prodId).sort((a: any, b: any) => {
-            // try to sort either comparative item according to range.
             if (a.abv >= minAbv && a.abv <= maxAbv) return -1;
             if (b.abv >= minAbv && b.abv <= maxAbv) return -1;
             return Math.random() - 0.5;

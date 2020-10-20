@@ -14,13 +14,11 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import HomeBanner from '../components/HomeBanner.vue';
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
 import ProdItem from "../components/ProdItem.vue";
 import Gallery from "../components/Gallery.vue";
 
 @Options({
   components: {
-    HelloWorld,
     HomeBanner,
     ProdItem,
     Gallery

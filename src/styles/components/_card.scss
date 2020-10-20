@@ -26,3 +26,16 @@
     }
   }
 }
+
+.related-products {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-content: center;  
+  grid-gap: 2rem;
+  justify-items: center;
+  padding: 0 10rem;
+  
+  @include respond(tab-port) { 
+    grid-template-columns: 50rem; 
+  }
+}

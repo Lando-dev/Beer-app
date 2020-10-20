@@ -20,7 +20,6 @@
     </div>
   </div>
 
-  <!-- Pagination -->
   <div class="pagination u-margin-top-md" v-if="pageNumbers.length > 1">
     <div class="page" v-for="page of pageNumbers" v-bind:key="page">
       <a href="#" v-if="page != currentPage" @click="changePage($event, page)">{{ page }}</a>
@@ -54,6 +53,7 @@ import Filter from './Filter.vue';
     }
   },
 
+  // set route params for categories
   mounted() {
     if (this.$route.params.category !== undefined) {
       this.category = this.$route.params.category;
@@ -67,16 +67,14 @@ import Filter from './Filter.vue';
           this.items = res.data; 
           // console.log(res)
           this.dataLoaded = true; 
-        
+
+          // Match category by keyword from description
           if (this.category != null) {
             this.items = this.items.filter((beer: any) => {
-              // indexOf will look for a match in the string
-              // if it exists, it will return 0 or higher
-              // else it will just give -1
               return beer.description.toLowerCase().indexOf(this.category) > -1;
             });
           }
-
+          // Pagination
           const totalPages = Math.ceil(this.items.length / this.maxPerPage);
           for (let page = 0; page < totalPages; page++)
           {
@@ -86,6 +84,7 @@ import Filter from './Filter.vue';
         .catch(err => { this.dataLoaded = false; console.log(err) });
       },
 
+  // Sorting
   methods:{
     sortAscending() {
       this.items.sort((a:any, b:any) => (a.name < b.name ? -1 : 1));
@@ -102,16 +101,14 @@ import Filter from './Filter.vue';
     
     changePage(e: any, page: number) {
       this.currentPage = page;
-
-      // where the array should start slicing.
       this.start = (this.currentPage - 1) * this.maxPerPage;
-      // where the array should stop slicing.
       this.end = this.currentPage * this.maxPerPage;
 
       e.preventDefault();
     }
   },
 
+  // Search
   computed: {
     filteredBeers: function() {
       return this.items.filter((item: any) => {

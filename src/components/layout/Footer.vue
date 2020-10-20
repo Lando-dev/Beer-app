@@ -28,8 +28,8 @@
       <hr>
       <div class="footer__copyright">
         <div class="">
-          <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by 
-          <a href="www.fabiogirlando.com">Fabio Girlando</a>.
+          <p class="copyright-text">Developed by
+          <a href="www.fabiogirlando.com">Fabio Girlando</a> for DTT Multimedia.
           </p>
         </div>
       </div>

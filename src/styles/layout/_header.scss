@@ -53,3 +53,69 @@ nav {
     }
   }
 }
+
+
+
+// Sidebar
+
+.navigation-menu {
+  display: none;
+  position: absolute;
+
+  @include respond(tab-port) {
+    display: flex;
+    position: absolute;
+    z-index: 3;
+    right: 5rem;
+    top: 2rem;
+  }
+
+  .menu-bar {
+    width: 20px;
+  }
+}
+
+.sidebar-menu {
+  background-color: $color-primary;
+  -webkit-box-shadow: -8px 8px 20px -10px rgba(0,0,0,0.75);
+  -moz-box-shadow: -8px 8px 20px -10px rgba(0,0,0,0.75);
+  box-shadow: -8px 8px 20px -10px rgba(0,0,0,0.75);
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 0;
+  display: none;
+
+  @include respond(tab-port) { 
+    display: block; 
+  }
+
+  .sidebar__items {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+
+    li {
+      padding: 4rem;
+    }
+
+    a {
+      color: $color-secondary;
+      font-size: 2.5rem;
+      
+      &:hover {
+        color: $color-tertiary;
+      }
+    }
+  }
+}
+
+.open {
+  position: absolute;
+  z-index: 2;
+  transition: ease-in .4s;
+  width: 40rem;
+  height: 90rem;
+}

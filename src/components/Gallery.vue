@@ -21,9 +21,6 @@
         <figure class="gallery__item gallery__item--7">
           <img class="gallery__img" src="../assets/images/gal-7.jpg" alt="Gallery Image">
         </figure>
-        <!-- <figure class="gallery__item gallery__item--8">
-          <img class="gallery__img" src="../assets/images/gal-8.jpg" alt="Gallery Image">
-        </figure> -->
         <figure class="gallery__item gallery__item--9">
           <img class="gallery__img" src="../assets/images/gal-9.jpg" alt="Gallery Image">
         </figure>

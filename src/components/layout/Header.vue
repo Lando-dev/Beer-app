@@ -1,6 +1,9 @@
 <template>
   <header class="header" :class="{change_color: scrollPosition > 400}">
     <nav class="nav" id="navbar" :class="{invert: scrollPosition > 400}" >
+      <div class="sidebar-menu" id="navigation-mobile">
+        
+      </div>
       <router-link class="nav__brand" to="/">
         TheBeerCo.
       </router-link>
