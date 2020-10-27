@@ -2,8 +2,21 @@ h1, h2, h3 {
   font-family: 'Playfair Display', serif;
 }
 
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  &,
+  &:link,
+  &:visited {
+    text-decoration: none;
+    color: $color-primary;
+  }
+}
+
 .heading-primary {
-  font-size: 7rem;
+  font-size: $primary-font;
   color: $color-primary;
 
   @include respond(tab-port) { 
@@ -30,11 +43,11 @@ h1, h2, h3 {
 
 .heading-secondary {
   color: $color-secondary;
-  font-size: 6rem;
+  font-size: $secondary-font;
 }
 
 .heading-tertiary {
-  font-size: 4rem;
+  font-size: $teriary-font;
   color: $color-secondary;
 }
 
@@ -46,20 +59,7 @@ h6 {
   letter-spacing: 2px
 }
 
-body {
-  font-family: 'Open Sans', sans-serif;
-}
-
-a {
-  &,
-  &:link,
-  &:visited {
-    text-decoration: none;
-    color: $color-primary;
-  }
-}
-
-.nav__brand {
+.navigation__brand {
   font-family: 'Lobster', cursive;
   font-size: 3rem;
   color: $color-tertiary !important;

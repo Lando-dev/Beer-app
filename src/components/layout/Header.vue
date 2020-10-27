@@ -1,10 +1,19 @@
 <template>
-  <header class="header" :class="{change_color: scrollPosition > 400}">
-    <nav class="nav" id="navbar" :class="{invert: scrollPosition > 400}" >
-      <div class="sidebar-menu" id="navigation-mobile">
-        
+  <header class="header" :class="{change_color: scrollPosition > 50}">
+    <nav class="navigation" id="navbar" :class="{invert: scrollPosition > 50}">
+      <div class="navigation__menu" @click="showNav = !showNav">
+        <svg fill="white" :class="{'close':showNav }" viewBox="0 0 100 80" width="30" height="20">
+          <rect width="100" height="5"></rect>
+          <rect y="30" x="30" width="70" height="5"></rect>
+          <rect y="60" width="100" height="5"></rect>
+        </svg>
+        <svg v-if="showNav = showNav"  viewBox="0 0 100 110" width="20" height="20">
+          <line x1="10" y1="10" x2="100" y2="100" stroke="black" stroke-width="7" />
+          <line x1="100" y1="10" x2="10" y2="100" stroke="black" stroke-width="7" />
+        </svg>
       </div>
-      <router-link class="nav__brand" to="/">
+      <Sidebar :class="{'open':showNav }" />
+      <router-link class="navigation__brand" to="/">
         TheBeerCo.
       </router-link>
       <ul class="menu">
@@ -22,28 +31,32 @@
 
 <script lang="ts">
 import {Options, Vue} from 'vue-class-component'
+import Sidebar from './Sidebar.vue'
 
 @Options({
   data() {
     return{
-      scrollPosition: null
+      scrollPosition: null,
+      showNav: false
     }
+  },
+
+  components: {
+    Sidebar
   },
 
   methods: {
     updateScroll() {
-       this.scrollPosition = window.scrollY
+      this.scrollPosition = window.scrollY
     }
   },
 
   mounted() {
-    window.addEventListener('scroll', this.updateScroll);
-
-    if (this.$route.path === "/category/:category") { 
-        this.colorNav = true
-    }
-    
-  },
+    window.addEventListener('scroll', this.updateScroll); 
+    // if (this.$route.path === "/category/:category") { 
+        
+    // }
+  }
 })
 
 export default class Header extends Vue {}

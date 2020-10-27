@@ -1,0 +1,41 @@
+.sidebar {
+  background-color: $color-primary;
+  -webkit-box-shadow: -8px 8px 20px -10px rgba(0,0,0,0.75);
+  -moz-box-shadow: -8px 8px 20px -10px rgba(0,0,0,0.75);
+  box-shadow: -8px 8px 20px -10px rgba(0,0,0,0.75);
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 0;
+  display: none;
+
+  &__menu {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+
+    li {
+      padding: 4rem;
+    }
+
+    a {
+      color: $color-secondary;
+      font-size: 2.5rem;
+      
+      &:hover {
+        color: $color-tertiary;
+      }
+    }
+  }
+}
+
+.open {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  transition: ease-in .4s;
+  width: 40rem;
+  height: 90rem;
+}

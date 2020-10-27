@@ -1,0 +1,31 @@
+.page-error{
+  display: grid;
+  justify-content: center;
+  position: relative;
+  padding: 5rem 10rem;
+
+  h5 {
+    position: absolute;
+    z-index: 1;
+    left: 65%;
+    top: 22%;
+    
+    .main {
+      font-size: 13rem;
+      letter-spacing: 6px;
+      display: block;
+    }
+
+    .sub {
+      font-size: 3rem;
+    }
+  }
+  
+  &__img {
+    -webkit-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
+    width: 100%;
+  }
+}

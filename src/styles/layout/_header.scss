@@ -1,7 +1,3 @@
-nav {
-  padding: 1rem 5rem;
-}
-
 .header {
   position:fixed;
   display: block;
@@ -9,6 +5,53 @@ nav {
   padding-bottom: 1rem;
   z-index: 1;
 }
+
+.navigation {
+  padding: 1rem 5rem;
+
+  // Sidebar
+  &__menu {
+    display: none;
+    position: absolute;
+    cursor: pointer;
+  
+    @include respond(tab-port) {
+      display: flex;
+      position: absolute;
+      z-index: 3;
+      right: 5rem;
+      top: 2rem;
+    }
+  }
+
+  .menu {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    float: right;
+    padding-top: 1rem;
+  
+    @include respond(tab-port) {
+      display: none;
+    }
+    
+    &__item {
+      font-size: 1.5rem;
+      text-transform: uppercase;
+  
+      &:not(:first-child) {
+        padding: 0 0 0 11rem;
+      }
+    }
+  }
+}
+
+
+.navigation a.router-link-exact-active {
+  color: $color-tertiary;
+}
+
+// Bind classes
 
 .change_color {
   background-color:$color-primary;
@@ -20,102 +63,15 @@ nav {
   opacity: 1;
 }
 
-.nav__brand {
-  float: left;
-}
-
 .invert a {
   color: $color-secondary;
   transition: all 0.5s ease-in-out;
 }
 
-.nav a.router-link-exact-active {
-  color: $color-tertiary;
+.invert svg {
+  fill: black;
 }
 
-.menu {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  float: right;
-  padding-top: 1rem;
-
-  @include respond(tab-port) {
-    display: none;
-  }
-  
-  &__item {
-    font-size: 1.5rem;
-    text-transform: uppercase;
-
-    &:not(:first-child) {
-      padding: 0 0 0 11rem;
-    }
-  }
-}
-
-
-
-// Sidebar
-
-.navigation-menu {
+.close {
   display: none;
-  position: absolute;
-
-  @include respond(tab-port) {
-    display: flex;
-    position: absolute;
-    z-index: 3;
-    right: 5rem;
-    top: 2rem;
-  }
-
-  .menu-bar {
-    width: 20px;
-  }
-}
-
-.sidebar-menu {
-  background-color: $color-primary;
-  -webkit-box-shadow: -8px 8px 20px -10px rgba(0,0,0,0.75);
-  -moz-box-shadow: -8px 8px 20px -10px rgba(0,0,0,0.75);
-  box-shadow: -8px 8px 20px -10px rgba(0,0,0,0.75);
-  position: absolute;
-  z-index: -1;
-  right: 0;
-  top: 0;
-  display: none;
-
-  @include respond(tab-port) { 
-    display: block; 
-  }
-
-  .sidebar__items {
-    display: grid;
-    align-content: center;
-    justify-content: center;
-    height: 100%;
-    text-align: center;
-
-    li {
-      padding: 4rem;
-    }
-
-    a {
-      color: $color-secondary;
-      font-size: 2.5rem;
-      
-      &:hover {
-        color: $color-tertiary;
-      }
-    }
-  }
-}
-
-.open {
-  position: absolute;
-  z-index: 2;
-  transition: ease-in .4s;
-  width: 40rem;
-  height: 90rem;
 }

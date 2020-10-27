@@ -22,14 +22,13 @@
           <li>Westland</li>
           <li>248-640-1183</li>
           <li>q1d8xf9fsce@temporary-mail.net</li>
-          <li></li>
         </ul>
       </div>
       <hr>
       <div class="footer__copyright">
         <div class="">
           <p class="copyright-text">Developed by
-          <a href="www.fabiogirlando.com">Fabio Girlando</a> for DTT Multimedia.
+            <a href="www.fabiogirlando.com">Fabio Girlando</a> for DTT Multimedia.
           </p>
         </div>
       </div>
@@ -49,5 +48,4 @@
 import { Options, Vue } from "vue-class-component";
 
 export default class Footer extends Vue {}
-
 </script>

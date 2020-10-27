@@ -10,12 +10,15 @@
       </div>
       <div v-if="!searchBox"></div>
     </div>
+
+    <!-- USE COMPONENT FOR CARD -->
     <div class="card" v-for="item of filteredBeers.slice(start, end)" v-bind:key="item.id">
+      <!-- <Card :listdata="items" /> -->
       <router-link class="card__link" :to="`/prod-details/${item.id}`">
         <img class="card__link-thumbnail" :src='item.image_url' alt="Beer bottle">
-        <h3 class="heading-tertiary" style="height: 1.5em; white-space: nowrap; overflow: hidden; width: 100%; text-overflow: ellipsis;">{{item.name}}</h3>
-        <span class="tagline tagline--main">{{item.tagline}}</span>
-        <span class="tagline tagline--sub">{{item.abv}}% alc./vol.</span>
+        <h3 class="heading-tertiary">{{ item.name }}</h3>
+        <span class="tagline tagline--main">{{ item.tagline }}</span>
+        <span class="tagline tagline--sub">{{ item.abv }}% alc./vol.</span>
       </router-link>
     </div>
   </div>
@@ -27,13 +30,13 @@
     </div>
   </div>
 
-  <div v-if="!dataLoaded">There are no items.</div>
+  <div class="data-error" v-if="!dataLoaded">Sorry! There are no items here.</div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import axios from 'axios';
-import Filter from './Filter.vue';
+// import Card from './Card.vue';
 
 @Options({
 
@@ -53,36 +56,39 @@ import Filter from './Filter.vue';
     }
   },
 
+  // components: {
+  //   Card
+  // },
+
   // set route params for categories
   mounted() {
     if (this.$route.params.category !== undefined) {
       this.category = this.$route.params.category;
-      this.searchBox = false;
+      this.searchBox = false; 
     }
 
     this.end = this.maxPerPage;
 
     axios.get('https://api.punkapi.com/v2/beers/') 
-        .then(res => { 
-          this.items = res.data; 
-          // console.log(res)
-          this.dataLoaded = true; 
+      .then(res => { 
+        this.items = res.data; 
+        this.dataLoaded = true; 
 
-          // Match category by keyword from description
-          if (this.category != null) {
-            this.items = this.items.filter((beer: any) => {
-              return beer.description.toLowerCase().indexOf(this.category) > -1;
-            });
-          }
-          // Pagination
-          const totalPages = Math.ceil(this.items.length / this.maxPerPage);
-          for (let page = 0; page < totalPages; page++)
-          {
-            this.pageNumbers.push(page + 1);
-          }
-        })
-        .catch(err => { this.dataLoaded = false; console.log(err) });
-      },
+        // Match category by keyword from description
+        if (this.category != null) {
+          this.items = this.items.filter((beer: any) => {
+            return beer.description.toLowerCase().indexOf(this.category) > -1;
+          });
+        }
+        // Pagination
+        const totalPages = Math.ceil(this.items.length / this.maxPerPage);
+        for (let page = 0; page < totalPages; page++)
+        {
+          this.pageNumbers.push(page + 1);
+        }
+      })
+    .catch(err => { this.dataLoaded = false; console.log(err) });
+  },
 
   // Sorting
   methods:{

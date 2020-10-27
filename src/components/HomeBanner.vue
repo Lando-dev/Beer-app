@@ -6,8 +6,7 @@
         Your browser is not supported!
       </video>
     </div>
-
-    <div class="banner-content">
+    <div class="banner__content">
       <h1 class="heading-primary">
         <span class="heading-primary--main">Get in touch with the worlds most loved beverage.</span>
         <span class="heading-primary--sub">Explore a vast catalog of beers and discover their origins.</span>
@@ -16,14 +15,8 @@
   </section>
 </template>
 
-<script>
-export default {
-  name: 'HomeBanner',
-}
-</script>
+<script lang="ts">
+import { Vue } from 'vue-class-component'
 
-<style scoped>
-  .banner {
-    position: relative;
-  }
-</style>
+export default class HomeBanner extends Vue {}
+</script>

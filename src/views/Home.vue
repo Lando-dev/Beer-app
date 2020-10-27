@@ -12,10 +12,10 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { Options, Vue } from 'vue-class-component';
 import HomeBanner from '../components/HomeBanner.vue';
-import ProdItem from "../components/ProdItem.vue";
-import Gallery from "../components/Gallery.vue";
+import ProdItem from '../components/ProdItem.vue';
+import Gallery from '../components/Gallery.vue';
 
 @Options({
   components: {
