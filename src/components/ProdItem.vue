@@ -1,5 +1,14 @@
 <template>
-  <div class="products" v-if="dataLoaded">
+  <div class="category-banner" v-if="category !== null">
+    <div class="">
+      <h1 class="heading-secondary u-center-text">{{ category.toUpperCase() }}</h1>
+      <router-link to="/categories">Go Back</router-link> 
+    </div>
+  </div>
+
+  <div v-if="!apiCall">Loading items</div>
+
+  <div class="products u-margin-bottom-md" v-if="apiCall && !hasError">
     <div v-if="searchBox" class="filter u-margin-top-md u-margin-bottom-md">
       <input class="search" type="text" v-model="search" placeholder="Search Beer">
       <div class="sort">
@@ -11,34 +20,32 @@
       <div v-if="!searchBox"></div>
     </div>
 
-    <!-- USE COMPONENT FOR CARD -->
     <div class="card" v-for="item of filteredBeers.slice(start, end)" v-bind:key="item.id">
-      <!-- <Card :listdata="items" /> -->
-      <router-link class="card__link" :to="`/prod-details/${item.id}`">
-        <img class="card__link-thumbnail" :src='item.image_url' alt="Beer bottle">
-        <h3 class="heading-tertiary">{{ item.name }}</h3>
-        <span class="tagline tagline--main">{{ item.tagline }}</span>
-        <span class="tagline tagline--sub">{{ item.abv }}% alc./vol.</span>
-      </router-link>
+      <card v-bind:item="item"></card>
     </div>
   </div>
 
-  <div class="pagination u-margin-top-md" v-if="pageNumbers.length > 1">
+  <div class="pagination" v-if="pageNumbers.length > 1">
     <div class="page" v-for="page of pageNumbers" v-bind:key="page">
       <a href="#" v-if="page != currentPage" @click="changePage($event, page)">{{ page }}</a>
       <span v-if="page == currentPage">{{ page }}</span>
     </div>
   </div>
 
-  <div class="data-error" v-if="!dataLoaded">Sorry! There are no items here.</div>
+  <div class="data-error" v-if="apiCall && hasError">Sorry! There was an error loading the item list.</div>
+  <div class="data-error" v-if="apiCall && items.length == 0">Sorry! There are no items here.</div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import axios from 'axios';
-// import Card from './Card.vue';
+import Card from './Card.vue';
+import ApiService from '../components/Service';
 
 @Options({
+  components: {
+    'card': Card
+  },
 
   data() {
     return{
@@ -48,7 +55,12 @@ import axios from 'axios';
       end: 10,
       pageNumbers: [],
 
-      dataLoaded: false,
+      // to check if the api was called.
+      apiCall: false,
+
+      // Errors loading
+      hasError: false,
+
       items: [],
       search: '',
       category: null,
@@ -56,12 +68,8 @@ import axios from 'axios';
     }
   },
 
-  // components: {
-  //   Card
-  // },
-
   // set route params for categories
-  mounted() {
+  async mounted() {
     if (this.$route.params.category !== undefined) {
       this.category = this.$route.params.category;
       this.searchBox = false; 
@@ -69,25 +77,29 @@ import axios from 'axios';
 
     this.end = this.maxPerPage;
 
-    axios.get('https://api.punkapi.com/v2/beers/') 
-      .then(res => { 
-        this.items = res.data; 
-        this.dataLoaded = true; 
+    this.items = await ApiService.getAll();
+    
+    this.apiCall = true;
+    if (this.items === undefined)
+    {
+      this.hasError = true;
+      return;
+    }
 
-        // Match category by keyword from description
-        if (this.category != null) {
-          this.items = this.items.filter((beer: any) => {
-            return beer.description.toLowerCase().indexOf(this.category) > -1;
-          });
-        }
-        // Pagination
-        const totalPages = Math.ceil(this.items.length / this.maxPerPage);
-        for (let page = 0; page < totalPages; page++)
-        {
-          this.pageNumbers.push(page + 1);
-        }
-      })
-    .catch(err => { this.dataLoaded = false; console.log(err) });
+    this.hasError = false; 
+
+    // Match category by keyword from description
+    if (this.category != null) {
+      this.items = this.items.filter((beer: any) => {
+        return beer.description.toLowerCase().indexOf(this.category) > -1;
+      });
+    }
+    // Pagination
+    const totalPages = Math.ceil(this.items.length / this.maxPerPage);
+    for (let page = 0; page < totalPages; page++)
+    {
+      this.pageNumbers.push(page + 1);
+    }
   },
 
   // Sorting

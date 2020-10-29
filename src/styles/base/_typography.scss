@@ -42,7 +42,7 @@ a {
 }
 
 .heading-secondary {
-  color: $color-secondary;
+  color: $color-primary;
   font-size: $secondary-font;
 }
 
@@ -112,4 +112,11 @@ h6 {
 .description {
   font-family: 'Open Sans', sans-serif;
   font-size: $default-font;
+}
+
+.data-error {
+  display: flex;
+  justify-content: center;
+  color: $color-tertiary;
+  font-size: 3rem;
 }

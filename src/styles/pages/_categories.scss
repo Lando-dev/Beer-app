@@ -46,3 +46,21 @@
     }
   }
 }
+
+.category-banner {
+  height: 30vh;
+  background-color: $color-secondary;
+  color: $color-primary;
+  margin-bottom: 5rem;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  a {
+    color: $color-tertiary;
+    display: block;
+    transform: translateY(200%);
+    font-size: 1.5rem;
+  }
+}

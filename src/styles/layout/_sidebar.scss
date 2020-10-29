@@ -22,7 +22,7 @@
 
     a {
       color: $color-secondary;
-      font-size: 2.5rem;
+      font-size: 3.2rem;
       
       &:hover {
         color: $color-tertiary;
@@ -36,6 +36,6 @@
   position: absolute;
   z-index: 2;
   transition: ease-in .4s;
-  width: 40rem;
-  height: 90rem;
+  width: 100vw;
+  height: 100vh;
 }

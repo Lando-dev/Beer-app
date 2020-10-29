@@ -8,6 +8,7 @@
     justify-self: center;
     padding-bottom: 2rem;
     display: block;
+    color: $color-secondary;
 
     @include respond(tab-port) { 
       font-size: 4rem;
@@ -73,12 +74,4 @@
   a {
     color: $color-secondary;
   }
-}
-
-.data-error {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  color: red;
-  font-size: 10rem;
 }

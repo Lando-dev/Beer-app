@@ -1,52 +1,17 @@
 <template>
-  <div v-if="product ==null">
+  <div v-if="!apiCall">Loading items</div>
+
+  <div v-if="product == null">
     <PageError />
   </div>
-  <div class="details u-margin-bottom-lg" v-if="product !=null">
-    <div class="details__primary u-center-text u-margin-bottom-sm">
-      <h1 class="heading-secondary">{{ product.name }}</h1>
-      <p class="tagline tagline--main">{{ product.tagline }}</p>
-    </div>
-    <div class="details__secondary u-margin-top-lg">
-      <div class="info">
-        <span class="info__detail info--title">Vol</span>
-        <span class="info__detail info--spec">{{ product.abv }}%</span>
-      </div>
-      <img class="details__image" :src='product.image_url' alt="Beer bottle">
-      <div class="info">
-        <span class="info__detail info--title">Amount</span>
-        <span class="info__detail info--spec">{{ product.volume.value }}ltr</span>
-      </div>
-      <p class="description u-margin-top-lg">{{ product.description }}</p>
-      <div class="specs u-margin-top-lg u-margin-bottom-lg">    
-        <div class="info info--1" >
-          <span class="info__detail info--title">First Brewed</span>
-          <span class="info__detail info--spec">{{ product.first_brewed }}</span>
-        </div>
-        <div class="info info--2">
-          <span class="info__detail info--title">IBU</span>
-          <span class="info__detail info--spec">{{ product.ibu }}</span>
-        </div>
-        <div class="info info--3">
-          <span class="info__detail info--title">EBC</span>
-          <span class="info__detail info--spec">{{ product.ebc }}</span>
-        </div>
-        <div class="info info--4">
-          <span class="info__detail info--title">Vol</span>
-          <span class="info__detail info--spec">{{ product.abv }}%</span>
-        </div>
-      </div>
-    </div>
+  
+  <div class="details u-margin-bottom-lg" v-if="apiCall && product != null">
+    <product-details v-bind:product="product"></product-details>
   </div>
 
   <div class="related-products u-margin-bottom-lg">
     <div class="card" v-for="item of relatedItems" v-bind:key="item.id">
-      <router-link class="card__link" :to="`/prod-details/${item.id}`">
-        <img class="card__link-thumbnail" :src='item.image_url' alt="Beer bottle">
-        <h3 class="heading-tertiary">{{ item.name }}</h3>
-        <span class="tagline tagline--main">{{ item.tagline }}</span>
-        <span class="tagline tagline--sub">{{ item.abv }}% alc./vol.</span>
-      </router-link>
+      <card v-bind:item="item"></card>
     </div>
   </div>
 </template>
@@ -57,15 +22,21 @@
   import PageError from '../components/PageError.vue';
   import ProdItem from "../components/ProdItem.vue";
   import Categories from './Categories.vue';
+  import Details from '../components/Details.vue';
+  import Card from '../components/Card.vue';
+  import ApiSerivce from '../components/Service';
 
   @Options({
     components: {
-      PageError
+      PageError,
+      'product-details': Details,
+      'card': Card
     },
 
     data() {
       return {
         product: null,
+        apiCall: false,
         relatedItems: []
       }
     },
@@ -74,17 +45,15 @@
     async mounted() {
       const prodId: string = this.$route.params.id;
 
-      const res = await axios.get(`https://api.punkapi.com/v2/beers/${prodId}`).catch(err => console.log(err));
-
-      if (res === undefined) return;
-
-      this.product = res.data[0];
+      this.product = await ApiSerivce.getById(Number.parseInt(prodId));
+      this.apiCall = true;
+      if (this.product === undefined) return;
 
       // Related products by alcohol level
 
       const abv = this.product.abv;
 
-      const minAbv = Math.floor(abv); 
+      const minAbv = Math.floor(abv);
       const maxAbv = Math.ceil(abv);
 
       // 2nd Call to api to provide related items
